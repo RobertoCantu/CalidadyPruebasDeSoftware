@@ -1,0 +1,4 @@
+/*
+	Esto es un comentario */
+//Esto tambien es un comentario
+//Y este es un ultimo comentario

@@ -8,13 +8,13 @@ using namespace std;
 class ReadFile {
     private:
         Counter lineCounter;
-        string removeWhiteSpeces(string str);
+        string removeWhiteSpaces(string str);
         void openFile(string fileName);
 
     public:
     ReadFile(string fileName);
         
-}
+};
 
 //Methods implementation
 
@@ -22,10 +22,10 @@ ReadFile::ReadFile(string fileName){
     openFile(fileName);
 }
 
-string ReadFile::removeWhiteSpeces(string str){
+string ReadFile::removeWhiteSpaces(string str){
     string clean = "";
     for (int i=0; i < str.length(); i++){
-        if (str[i] != ' ' || str[i] != '\t'){
+        if (str[i] != ' ' && str[i] != '\t'){
             clean += str[i];
         }
     }
@@ -56,10 +56,10 @@ void ReadFile::openFile(string fileName){
         string sLine;
         while (!myInputFile.eof()){
             getline(myInputFile, sLine);
-            sLine = removeWhiteSpeces(sLine);
+            sLine = removeWhiteSpaces(sLine);
 
             if (comment){
-                if (sLine.find("/*") != string::npos){
+                if (sLine.find("*/") != string::npos){
                     comment = false;
                     lineCounter.addCommentLine();
                 } else {
@@ -84,11 +84,11 @@ void ReadFile::openFile(string fileName){
         }
         cout << "Nombre del archivo: " << fileName << endl;
         cout << "--------------------------------------------" << endl;
-        cout << "Cantidad de lineas en blanco: " << lineCounter.getWhiteLines << endl;
-        cout << "Cantidad de lineas con comentarios: " << lineCounter.getcommentLines() << endl;
-        cout << "Cantiad de lineas con codigo: " << lineCounter.getcodeLines() << endl;
+        cout << "Cantidad de lineas en blanco: " << lineCounter.getWhiteLines() << endl;
+        cout << "Cantidad de lineas con comentarios: " << lineCounter.getCommentLines() << endl;
+        cout << "Cantiad de lineas con codigo: " << lineCounter.getCodeLines() << endl;
         cout << "--------------------------------------------" << endl;
-        cout << "Cantidad total de lineas: " << lineCounter.getwhiteLines() + lineCounter.getcommentLines() + lineCounter.getcodeLines() << endl;
+        cout << "Cantidad total de lineas: " << lineCounter.getWhiteLines() + lineCounter.getCommentLines() + lineCounter.getCodeLines() << endl;
     }
 
 

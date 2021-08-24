@@ -15,7 +15,7 @@ class Counter {
         int getWhiteLines();
         int getCommentLines();
         int getCodeLines();
-}
+};
 
 //Constructor 
 Counter::Counter(){
