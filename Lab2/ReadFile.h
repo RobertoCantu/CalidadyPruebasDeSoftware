@@ -16,7 +16,6 @@ class ReadFile {
     vector<Counter> assignClassType(vector<Counter>);
     void printResults(vector<Counter>);
     int convertStrToInt(string);
-    bool insideStr(string);
     bool isInsideString(string);
 
     public:
@@ -47,14 +46,6 @@ bool ReadFile::isInsideString(string str){
 }
 
 //Methods declarations
-bool ReadFile::insideStr(string str){
-    //There is a string
-    if (str.find("\"") != string::npos){
-        return true;
-    } else {
-        return false;
-    }
-}
 
 int ReadFile::convertStrToInt(string str){
     int pos = str.find("=");
@@ -238,7 +229,7 @@ void ReadFile::openFile(string fileName){
                     }
                  } else{
                     if (sLine.length() > 0 && sLine.length() <=2){
-                        //Muy probablemente tengamos que ignorar esa linea
+                        continue;
                     }
                     else if(sLine.length() == 0){
                         //Do nothing is an empty line
