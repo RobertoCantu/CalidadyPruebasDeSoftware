@@ -1,0 +1,107 @@
+Diseno para el Lab 2
+
+#include <string>
+#include <iostream>
+Class Counter
+private:
+	string fileName
+	char classType
+	int codeLines
+	int itemLines  
+	int baseLines
+	int deletedLines
+	int modifiedLines
+	int addedLines 
+	
+public:
+	setFileName(string)
+	set classType(char)
+	addCodeLine
+	addItemLine
+	setBaseLines(int)
+	setDeleteLines(int)
+	addModifiedLines(int)
+	setAddedLines(int)
+	getFileName
+	getClassType
+	getCodeLines
+	getItemLines
+	getBaseLines
+	getModifiedLines
+	getAddedLines
+
+#include <iostream>
+#include <string>
+#include <vector>
+#include <fstream>
+#include <sstream>
+#include "Counter.h"
+Class Readfile 
+
+privat:
+	removeExtension(string)
+	removeWhiteSpaces (string)
+	vector<Counter>
+	printResults
+	convertStrToInt(string)
+	int Total lines
+public:
+	ReadFile(string)
+
+	
+
+
+//Procedimiento
+
+1.Leer el archivo del teclado
+
+2.Remover la extension del nombre del archivo 
+
+Revisar si el archivo ya existe?
+
+vector <Counter> counter
+Revisar el nombre en cada counter dentro del vector y verificar su existencia
+Si no existe, creamos un nuevo objecto Counter con el nombre sin extesion
+
+Si ya existe, entonces igualamos el nuevo objeto Counter al actual para poder seguir trabajndo con el y borramos 
+el que ya exisitia previamente para evitar repetidos en el vector de Conunters
+
+4.Leer la linea y remover espacios en blanco
+
+5. Revisar si nos encontramos dentro de un comentario mediante una variable booleana Comment
+
+	5.1 Si estamos adentro de un commentario, lo siguiente es buscar "*/".
+		5.1.1 Si si se enceuntra cambiamos la booleana a falsa y saber que ya estamos fuera del comment
+		5.1.2 Si no se encuentra seguimos leyendo lineas sin agregar nada al Contador.
+	
+	5.2 Si estamos fuera de un comentario lo siguinete es ver que tipo de linea es 
+	5.3 Si encontramos un comment de tipo "//" tendremos ver que contiene adentro
+		5.3.1 Si encontramos dentro del string un "//.i" llamamos a addItemLine()
+		5.3.2 Si encontramos dentro del string un "//.b" tendremos que convertir 
+		el numero que contiene en formato string a int y despues llamar a setBaseLines(int)
+		5.3.3 Si encontramos dentro del string un "//.d" tendremos que convertir
+		el numero que contiene en formato string a int y despues llamar a setDeleteLines(int)
+		5.3.4 Si encontramos dentro del string un "//.m" tenemos que verificar que no se encuentre ni
+		dentro de un /* */ o en un string, despues llamamos a addModifiedLines()
+	5.4 Si no es un comentario tenemos que verificar que tipo de linea es 
+	5.5 Si es una linea con size igual a 0 no hacemos nada y nos brincamos a la siguiente linea 
+	5.6 Si el tamanano es mayor a 0 tenemos que analizar que contiene 
+		5.6.1 Si su tamano esta enter 1 y 2, tenemos que ver si contiene {,} o }; si se cumple entonces no agregamos ninguna linea
+		5.6.2 Llamamos al metodo addCodeLine
+6. Leer la siguiente linea de codigo y repetir el paso 5 y subindices hasta llegar a EOF
+7. Revisar a que clase pertenece el archivo
+	7.1 Si B> 0 && (M > 0 || D > 0 || A > 0), agregamos el classType = B
+	7.2 Si B = 0 && M = 0 && D = 0 && A > 0, agregamos el classType = N
+	7.3 Si B > 0 && M = 0 && D = 0 && A = 0, agregamos el classType = R
+	7.4
+8. Finalmente agremamos nuestro objecto de currentFile y lo agregamos al vector de Counter
+9. Le preguntamos al usuario si desea ingresar un nuevo Archivo
+	8.1 Si ingresa un nuevo nombre de archivo repetimos todos los pasos.
+	8.2 Si el usuario ingresa el numero 0 ya no se aceptara ninguna archivo nuevo
+10. Imprimimos los resultados en consola con todos los archivos que el usuario
+ingreso y acomodados segun el tipo de clase de cada archivo. 
+
+
+ 
+
+	
