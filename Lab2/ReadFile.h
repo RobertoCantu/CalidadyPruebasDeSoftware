@@ -6,6 +6,7 @@
 #include "Counter.h"
 using namespace std;
 
+//.b=60
 class ReadFile {
     private:
     void openFile(string);
@@ -27,11 +28,12 @@ ReadFile::ReadFile(string fileName){
     openFile(fileName);
     
 }
+//.i
 bool ReadFile::isInsideString(string str){
     bool quote = false;
 
     for (int i=0; i < str.length(); i++){
-        if (str[i] == '"'){
+        if (!quote && str[i] == '"'){
             quote = true;
             continue;
         }
@@ -40,13 +42,19 @@ bool ReadFile::isInsideString(string str){
                 //Indeed it is inside a string
                 return true;
             }
+        
+        }
+
+        if (quote && str[i] == '"'){
+            quote = false;
+            continue;
         }
     }
     return false;
 }
 
 //Methods declarations
-
+//.i
 int ReadFile::convertStrToInt(string str){
     int pos = str.find("=");
     string temp = str.substr(pos + 1);
@@ -54,7 +62,7 @@ int ReadFile::convertStrToInt(string str){
     return intStr;
 
 }
-
+//.i
 void ReadFile::printResults(vector<Counter> files){
 
     cout << "CLASES BASE:" << endl;
@@ -99,7 +107,7 @@ void ReadFile::printResults(vector<Counter> files){
 
     cout << "Total de LDC=" << totalLines << endl;
 }
-
+//.i
 vector<Counter> ReadFile::assignClassType(vector<Counter> files){
     for (int i=0; i < files.size(); i++){
         if(files[i].getBaseLines() > 0 && (files[i].getModifiedLines() > 0 || files[i].getDeletedLines() > 0 || files[i].getAddedLines() > 0)){
@@ -115,12 +123,15 @@ vector<Counter> ReadFile::assignClassType(vector<Counter> files){
     return files;  
 
 }
+
+//.i
 string ReadFile::removeExtension(string str){
     int pos = str.find(".");
     str = str.substr(0,pos);
     return str;
 }
 
+//.i
 string ReadFile::removeWhiteSpaces(string str){
     string clean = "";
     for (int i=0; i < str.length(); i++){
@@ -131,7 +142,8 @@ string ReadFile::removeWhiteSpaces(string str){
     return clean;
 }
 
-void ReadFile::openFile(string fileName){
+//.i
+void ReadFile::openFile(string fileName){ 
      ifstream myInputFile;
      myInputFile.open(fileName.data());
      string newFileName = "";
@@ -166,50 +178,69 @@ void ReadFile::openFile(string fileName){
          while (!myInputFile.eof()){
              getline(myInputFile, sLine);
              sLine = removeWhiteSpaces(sLine);
-
              if (comment){
-                 if (sLine.find("*/") != string::npos){
+                 
+                
+                 if (sLine.find("*/") != string::npos){  //.m
                      comment = false;
                      continue;
-                     //Dont add line delete
                  } else {
                      continue;
                  }
 
             } else {
                 if (sLine.find("/*") != string::npos){
-                    //Dont add line delete
-                    comment = true;
-                    continue;
+                    int pos = sLine.find("/*");
+                    if (pos == 0){
+                        comment = true;
+                        continue;
+                    } else {
+                        currFile.addCodeLine();
+                    }
+                   
                 }
-                if (sLine.find("//") != string::npos){
+                
+                if (sLine.find("//") != string::npos){ //.m 
                     //Dont add comment delete
                     //Check if it is an item
                     if(sLine.find("//.i") != string::npos){
-                        //do something
                         currFile.addItemLine();
                         continue;
                     }
                     else if(sLine.find("//.b") != string::npos){
-                        int baseLines = convertStrToInt(sLine);
+                        int pos = sLine.find("//.b");
+                        if (pos > 0){
+                            currFile.addCodeLine();
+                            continue;
+                        } else{
+                            int baseLines = convertStrToInt(sLine);
 
                         currFile.setBaseLines(baseLines);
                         continue;
-                        //We need a convert from string to int
+                        }
+                        
 
                     }
                     else if(sLine.find("//.d") != string::npos){
-                        //We need a convert from string to int
-                        int deletedLines = convertStrToInt(sLine);
-                        currFile.setDeletedLines(deletedLines);
-                        continue;
+                        int pos = sLine.find("//.d");
+                        if (pos > 0){
+                            currFile.addCodeLine();
+                            continue;
+                        } else {
+                            //We need a convert from string to int
+                            int deletedLines = convertStrToInt(sLine);
+                            currFile.setDeletedLines(deletedLines);
+                            continue;
+                        }
+                        
                     }
                     else if(sLine.find("//.m") !=string::npos){
                         int pos = sLine.find("//");
-                        if (pos == 0){
+                        int size = sLine.length();
+                        if (pos == 0 && size == 4){
                             //Do nothing it is a comment
-                            continue;
-                            
+                            currFile.addModifiedLine();
+                            continue;              
                         } else {
                             //Check if it is not inside an string 
                             if(!isInsideString(sLine)){
@@ -227,12 +258,13 @@ void ReadFile::openFile(string fileName){
                         }
                         
                     }
-                 } else{
+                 } else{ //Not a comment
                     if (sLine.length() > 0 && sLine.length() <=2){
                         continue;
                     }
                     else if(sLine.length() == 0){
                         //Do nothing is an empty line
+                        continue;
                     } else{
                         
                         currFile.addCodeLine();
@@ -248,7 +280,8 @@ void ReadFile::openFile(string fileName){
         myInputFile.close();
 
         cout << "Enter new fileName or type 1 to end the program" << endl;
-        cin >> newFileName;
+        cin >> newFileName; //.m
+        //.d=7
         if (newFileName.length() == 1){
             //Added Lines
             for (int i=0; i < files.size(); i++){

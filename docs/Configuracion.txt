@@ -1,0 +1,9 @@
+Nombre|Roberto
+ApellidoP|Cantu
+ApellidoM|Reyes
+ID|A01196704
+Organizacion|itesm
+Lenguaje|C++
+Extension|.h, .hh, .hpp, .hxx, .h++, .cc, .cpp, .cxx, .c++
+Dir1|C:\Users\rober\Documents\8 Semestre\Calidad\Laboratorios\CalidadyPruebasDeSoftware
+Dir2|C:\Users\rober\Documents\8 Semestre\Calidad\Laboratorios\CalidadyPruebasDeSoftware\Lab2

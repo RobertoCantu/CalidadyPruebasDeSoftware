@@ -1,8 +1,10 @@
 #include <iostream>
 #include <string>
 using namespace std;
+//.b=31
 class Counter {
     private:
+    //.d=2
         string fileName;
         char classType;
         int codeLines;
@@ -15,6 +17,7 @@ class Counter {
 
 
     public:
+    //.d=2
     Counter();
     void setFileName(string);
     void setClassType(char);
@@ -38,6 +41,7 @@ class Counter {
 
 //Constructor 
 Counter::Counter (){
+    //.d=2
     fileName = "";
     classType = '0';
     codeLines = 0;
@@ -49,6 +53,7 @@ Counter::Counter (){
 }
 
 //Method Declaration
+//.d=4
 void Counter::setFileName(string fileName){
     this->fileName = fileName;
 }
