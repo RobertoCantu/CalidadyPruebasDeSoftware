@@ -1,0 +1,122 @@
+Librerias a incluir
+iostream
+string
+vector
+fstream
+stream
+iomanmip
+math.h
+
+Necesitare disenar 4 clases, las cuales se muestran a continuacion 
+Reusada:
+Main (){
+//Solo lee el archivo
+Readfile(fileName);
+}
+
+Nueva:
+class Tuple {
+private:
+int x
+int y
+public:
+getters and setters
+}
+
+Nueva:
+class StatisticalAnalysis {
+
+vector<Tuple> tuples
+int n;
+int xk;
+int r;
+int r2;
+int b0;
+int b1;
+int yk;
+int sumX;
+int sumY;
+int avgX;
+int avgY;
+int sumX2;
+int sumY2;
+int sumXY;
+
+Falto agregar los getters los setters no se necesitan 
+void setXk(int)
+void setTuple(sLine){
+Descomponer el string en dos enteros utilizando la funcion de C++ substring 
+Tuple currLine
+currLine.setX(int)
+currLine.setY(int)
+tuples.pushback(tuple)
+}
+
+void setXk(int); //Este es el unico set que necesitaermos 
+int getN
+int getXk
+int getR
+int getR2
+int getB0
+int getB1
+int getYk
+void calcTuples(){
+1.Se va iterar sobre todo el vector de tuples
+2.Por cada tupla se va sumar respectivamente a sumX,Sumy,sumX2,sumY2 y sumXY;
+3.Despues de llegar al final del vector calcular avgX y avgY
+
+}
+void calcB1(){
+Se implementara la siguiente formula:
+b1 = sumXY - (N * avgX * avgY) / sumX2 - (n - avgX^2)
+}
+
+void calcRXY{
+r = n(sumXY) - (sumX)(sumY)/ sqrt ((n * sumX2) - sumX^2)((n*sumY2) - sumY^2)
+}
+void calcR2{
+r2 = r^2
+
+}
+void calcB0{
+b0 = avgY - b1*avgX
+
+}
+void calcYk{
+yk = b0 + b1*xk
+
+
+}
+
+
+};
+
+Base:
+class ReadFile {
+
+openFile();
+};
+
+Idea del plan de diseno 
+1.Vamos a leer del teclado un archivo
+2.Si el archivo existe o no esta vacio pasamos a abrirlo. 
+3.Se va a leer la primera linea
+	3.1 Validamos que sea un numero real y mayor o igual a 0.
+	3.2 Se guarda en el objeto currFile.setXk(int)
+4.Se va leer la siguiente linea
+	4.1 Se guarda en el objeto currFile.setTuple(string)
+	4.2 Validar que solo existan dos terminos mayores o iguales a 0.
+5.Repetir el paso numero 4 hasta llegar al fin del archivo 
+
+6. Necesitamos hacer calculos previos(sumX,sumY,avgX,avgY,sumX2,sumY2,sumXY) antes de sacar las estadisticas,
+se llama al metodo currFile.calcTuples()
+
+7.Calcular beta 1.
+8.Calcular r.
+9.Calcular r2.
+10.Calcular beta 0.
+11.Calcular yk.
+
+12.Cerramos el archivo
+13.Imprimir los resultados como los especifa en los requerimientos. 
+	
