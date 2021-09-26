@@ -1,0 +1,110 @@
+Se van a requerir de 3 clases
+Includes a incluir
+<iostream>
+<iomanip>
+<math.h>
+
+Class main
+double x;
+int dof;
+double probability;
+Hace validacion sobre el valor de x y dof
+StatisticalAnalysis obj
+PrintResults obj
+
+
+Class PrintResults 
+Constructor(int,double,double)
+Metododos
+void print
+
+
+Class StatisticalAnalysis
+
+numSeg = 10;
+acceptableError = 0.0000001
+oldResult = 0;
+newResult = 0;
+
+Aqui se va necesitar recursion double gammaFunction(double num){
+
+if (num == 1)
+return 1;
+}
+
+else if(num == 0.5){
+return sqrt of pi;
+}
+
+else {
+return (num - 1)  * gammaFunction(num - 1);
+}
+
+doubel TDistributionFunction(int dof, double x){
+	 [gamma((dof + 1) / 2) / [(dof * pi) ^0.5 * GammaFunction(dof / 2)]] * (1 + (x^2) / dof) ^ -(dof + 1)/ 2
+
+} 
+
+
+//Funciones
+//Se va llamar recursivamente hasta que su resultado sea menor que el acceptableError;
+double simponsRule(double x, int dof){
+
+int i = 1;
+int W = x / numSeg;
+int sumImpair = 0;
+int sumPair = 0;
+int tempResult = 0;
+
+for ( i; i < numSeg; i ++){
+
+//This is an even number
+if i % 2 == 0 then
+
+sumPair += tDistributionFunction(dof, i * W);
+
+else //This is an odd number
+sumImpair += tDistributionFunction(dof, i * W);
+
+
+}
+
+if oldResult - newResult < acceptableError
+return newResult;
+else 
+oldResult = newResult
+newResult = tempResult 
+numSeg *= 2;
+return simponsRule(x,dof)
+
+
+if oldResult == 0 and newResult == 0 then 
+oldResult = (TDistribution(dof,0) + 4*sumImpair + 2 * sumPair + tDistributionFunction(dof,(i)*w)) * W / 3
+numSeg *= 2;
+return simponsRule(x,dof)
+
+if oldResult > 0 and newResult == 0 then
+newResult = (TDistribution(dof,0) + 4*sumImpair + 2 * sumPair + tDistributionFunction(dof,(i)*w)) * W / 3
+numSeg *= 2;
+return simponsRule(x,dof)
+
+
+
+
+}
+
+
+
+
+Alogirtmo:
+
+Se va leer de consola x que es un numero real mayor o igual a cero, dof que es un numero entero mayor a 0 
+
+Pasamos los valores a la funcion de Simpson
+
+Se realiza la integral
+
+Imprimir los resultados en consola 
+
+
+

@@ -16,6 +16,7 @@ class ReadFile {
     int totalLines = 0;
     vector<Counter> assignClassType(vector<Counter>);
     void printResults(vector<Counter>);
+    void makeFile(vector<Counter>);
     int convertStrToInt(string);
     bool isInsideString(string);
 
@@ -63,8 +64,9 @@ int ReadFile::convertStrToInt(string str){
 
 }
 //.i
-void ReadFile::printResults(vector<Counter> files){
-
+void ReadFile::makeFile(vector<Counter> files){
+    
+    ofstream cout("output.txt");
     cout << "CLASES BASE:" << endl;
     for (int i=0; i < files.size(); i++){
        if(files[i].getClassType() == 'B'){
@@ -106,6 +108,55 @@ void ReadFile::printResults(vector<Counter> files){
     cout << "--------------------------------------------" << endl;
 
     cout << "Total de LDC=" << totalLines << endl;
+    totalLines = 0;
+    
+}
+
+void ReadFile::printResults(vector<Counter> files){
+    
+    
+    cout << "CLASES BASE:" << endl;
+    for (int i=0; i < files.size(); i++){
+       if(files[i].getClassType() == 'B'){
+           cout << "\t" << files[i].getFileName();
+           cout << ": T=" << files[i].getCodeLines();
+           cout << ", I=" << files[i].getItemLines();
+           cout << ", B=" << files[i].getBaseLines();
+           cout << ", D=" << files[i].getDeletedLines();
+           cout << ", M=" << files[i].getModifiedLines();
+           cout << ", A=" << files[i].getAddedLines() << endl;
+           totalLines += files[i].getCodeLines();
+        } 
+    }
+    cout << "--------------------------------------------" << endl;
+
+    cout << "CLASES NUEVAS:" <<endl;
+    for (int i=0; i < files.size(); i++){
+        if(files[i].getClassType() == 'N'){
+            cout << "\t" << files[i].getFileName();
+            cout << ": T=" << files[i].getCodeLines();
+            cout << ", I=" << files[i].getItemLines() << endl;
+            totalLines += files[i].getCodeLines();
+        }
+
+    }
+    cout << "--------------------------------------------" << endl;
+
+    cout << "CLASES REUSADAS:" << endl;
+    for (int i=0; i < files.size(); i++){
+        if(files[i].getClassType() == 'R')
+        {
+            cout << "\t" << files[i].getFileName();
+            cout << ": T=" << files[i].getCodeLines();
+            cout << ", I=" << files[i].getItemLines();
+            cout << ", B=" << files[i].getBaseLines() << endl;
+            totalLines += files[i].getCodeLines();
+        }
+    }
+    cout << "--------------------------------------------" << endl;
+
+    cout << "Total de LDC=" << totalLines << endl;
+    
 }
 //.i
 vector<Counter> ReadFile::assignClassType(vector<Counter> files){
@@ -290,7 +341,9 @@ void ReadFile::openFile(string fileName){
             //After finishing program Assign Class Type && AddedLines 
             files = assignClassType(files);
             //Print results 
+            makeFile(files);
             printResults(files);
+           
             return;
         } else {
             openFile(newFileName);
