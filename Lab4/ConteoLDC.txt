@@ -1,0 +1,10 @@
+CLASES BASE:
+	main: T=23, I=1, B=8, D=3, M=0, A=18
+	StatisticalAnalysis: T=60, I=3, B=106, D=90, M=1, A=44
+--------------------------------------------
+CLASES NUEVAS:
+	PrintResults: T=20, I=1
+--------------------------------------------
+CLASES REUSADAS:
+--------------------------------------------
+Total de LDC=103

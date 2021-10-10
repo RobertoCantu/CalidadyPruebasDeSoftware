@@ -3,8 +3,10 @@
 #include "StatisticalAnalysis.h"
 
 using namespace std;
-
+//.b=8
+//.i
 int main(){
+    //.d=3
     double x;
     int dof;
     double probability;

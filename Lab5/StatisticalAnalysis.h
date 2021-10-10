@@ -1,44 +1,42 @@
-#include <iostream>
 #include <math.h>
 #include <stdlib.h> 
+#include <iostream>
 
-# define PI 3.14159265358979323846
-//.b=106
+//# define PI 3.14159265358979323846
+#define _USE_MATH_DEFINES
+//.b=60
 class StatisticalAnalysis{
     private:
-    //.d=13
-    int numSeg; //Must be an even number
-    double acceptableError;
-    double oldResult;
-    double newResult;
-    double gamma(double);
-    double tDistribution(double, int);
-    bool firstTime = false;
+        double numSeg; //Must be an even number
+        double acceptableError; //Maximum error
+        double oldResult;
+        double newResult;
+        double gamma( double);
+        double tDistribution( double, int);
+        bool firstTime = false;
     
 
 
     public:
-    //.d=11
-    StatisticalAnalysis(); //Constructor 
-    double simpsonsRule(double,int);
-
+        StatisticalAnalysis(); //Constructor 
+        double simpsonsRule( double,int);
 
 };
 
-StatisticalAnalysis::StatisticalAnalysis(){ //.m
-    numSeg = 10;
-    acceptableError = 0.0000001;
+StatisticalAnalysis::StatisticalAnalysis(){ 
+    numSeg = 100;
+    acceptableError = 0.00000001 ;
     oldResult = 0.0;
     newResult = 0.0;
 }
-//.d=66
+
 //.i
-double StatisticalAnalysis::gamma(double num){
+ double StatisticalAnalysis::gamma(double num){
     if(num == 1){
         return 1.0;
     }
     else if(num == 0.5){
-        return sqrt(PI);
+        return sqrt(M_PI);
     } else {
         return (num-1.0)*gamma(num - 1.0);
     }
@@ -46,12 +44,12 @@ double StatisticalAnalysis::gamma(double num){
 }
 
 //.i
-double StatisticalAnalysis::tDistribution(double x, int dof){
-    return (gamma((dof+1.0) / 2.0) / (pow((dof * PI),0.5) * gamma(dof/2.0))) * pow((1.0 + (pow(x,2.0) / dof)),-(dof+1.0) / 2.0 );
+ double StatisticalAnalysis::tDistribution( double x, int dof){
+    return (gamma((dof+1.0) / 2.0) / (pow((dof * M_PI),0.5) * gamma(dof/2.0))) * pow((1.0 + (x*x /dof)),-(dof+1.0) / 2.0 );
 }
 
 //.i
-double StatisticalAnalysis::simpsonsRule(double x, int dof){
+ double StatisticalAnalysis::simpsonsRule( double x, int dof){
     int i = 1;
     double w = x / numSeg;
     double sumImpair = 0.0;
@@ -62,12 +60,13 @@ double StatisticalAnalysis::simpsonsRule(double x, int dof){
         if (i % 2 == 0){
             sumPair += tDistribution( i * w, dof);
         } else {
-            sumImpair += tDistribution( i * w, dof);
+            sumImpair += tDistribution(i * w, dof);
         }
     }
     
     tempResult = (tDistribution(0.0,dof) + 4.0 * sumImpair + 2.0 * sumPair + tDistribution(i*w,dof)) * w / 3.0;
    
+   //Conditionals for loading first results 
     if (oldResult == 0 && firstTime == false){
         firstTime = true;
         oldResult = tempResult;
@@ -83,13 +82,13 @@ double StatisticalAnalysis::simpsonsRule(double x, int dof){
         return simpsonsRule(x,dof);
     }
 
-    if (oldResult == 0 && newResult == 0){
+    else if (oldResult == 0 && newResult == 0){
         oldResult = tempResult;
         numSeg *= 2;
         return simpsonsRule(x,dof);
     }
 
-    if (oldResult > 0 && newResult == 0){
+    else if (oldResult > 0 && newResult == 0){
         newResult = tempResult;
         numSeg *= 2;
         return simpsonsRule(x,dof);

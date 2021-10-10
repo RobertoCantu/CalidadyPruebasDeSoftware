@@ -1,0 +1,78 @@
+Main
+Pedir el valor de p (numero real entre 0 y 0.5)
+
+dof numero entero mayor a 0 
+
+
+
+Clase Calculate X
+//Atributos necesarios
+x = 1.0 
+acceptableError = 0.00000001
+d = 0.5 
+result 
+oldP
+newP 
+First boolean
+Right boolean
+Left boolean
+//From constructor 
+p = ?
+dof = ?
+
+Method calculateX(x)
+
+result = SimponsRule (x,dof)
+
+if (first) then oldP = result 
+	if result < P 
+	x += d
+	//Calcular d
+	d /= 2
+	calculateX(x)
+	else if result > P
+	x -= d
+	d /= 2
+	calculateX(x)
+
+if (!first && newP == 0){
+	
+newResult = result 
+}
+
+if (!first)
+	if result < p //sumar d a x
+	 
+	if right == false then 
+	
+	x + = d
+	
+	//Caluclar d
+	else d /= 2;
+	right = true
+	left = false 
+	si es true significa que ya estbaa actividad tons d se deja igual 
+	if(abs result - oldP) < acceptableError then
+	return x //ends
+	else
+	oldp = result
+	Recursion calculateX(x)
+
+
+if (!first)
+	if result > p //restar d a x
+	if left == false then 
+	x -= d
+	d/ = 2;
+	left = true
+	right = false
+	else 
+	d la dejamos igual 
+	if( absresult - oldP) < acceptableError then
+	return x 
+	else
+	oldp = result 
+	calcualteX(x)
+
+
+
