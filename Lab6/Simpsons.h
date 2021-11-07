@@ -1,12 +1,16 @@
+//Autor: Roberto Cantu Reyes A01196704
+//Fecha de creacion 25/09/2021
+//Fecha de modificacion 15/10/2021
+//Este es el archivo que se encarga de realizar la integral
+//mediante el metodo de simpsons
 #include <iostream>
 #include <math.h>
 #include <stdlib.h> 
-
 # define PI 3.14159265358979323846
-//.b=106
-class StatisticalAnalysis{
+
+//.b=60
+class Simpsons{
     private:
-    //.d=13
     int numSeg; //Must be an even number
     double acceptableError;
     double oldResult;
@@ -15,25 +19,25 @@ class StatisticalAnalysis{
     double tDistribution(double, int);
     bool firstTime = false;
     
-
-
     public:
-    //.d=11
-    StatisticalAnalysis(); //Constructor 
+    Simpsons(); //Constructor 
     double simpsonsRule(double,int);
 
 
 };
-
-StatisticalAnalysis::StatisticalAnalysis(){ //.m
+//Constructor
+Simpsons::Simpsons(){ 
     numSeg = 100;
-    acceptableError = 0.0000001;
+    acceptableError = 0.000000001;
     oldResult = 0.0;
     newResult = 0.0;
 }
-//.d=66
+
+//Recibe como parametro un numero de tipo doble
+//Se encarga de calcular el valor de gamma
+//Retorna como resultado el valor de gamma 
 //.i
-double StatisticalAnalysis::gamma(double num){
+double Simpsons::gamma(double num){
     if(num == 1){
         return 1.0;
     }
@@ -45,13 +49,19 @@ double StatisticalAnalysis::gamma(double num){
 
 }
 
+//Recibe como parametro el valor de x y dof que es el grado de libertad
+//Se encarga de calcular el resultado de la distribucion t
+//Retorna como resultado el valor de la distribucion t
 //.i
-double StatisticalAnalysis::tDistribution(double x, int dof){
+double Simpsons::tDistribution(double x, int dof){
     return (gamma((dof+1.0) / 2.0) / (pow((dof * PI),0.5) * gamma(dof/2.0))) * pow((1.0 + (pow(x,2.0) / dof)),-(dof+1.0) / 2.0 );
 }
 
+//Recibe como parametro el valor de x y dof que es el grado de libertad
+//Se encarga de calcular la integral mediante el metodo de simpson utilizando recursividad
+//Retorna como resultado la probablidad 
 //.i
-double StatisticalAnalysis::simpsonsRule(double x, int dof){
+double Simpsons::simpsonsRule(double x, int dof){
     int i = 1;
     double w = x / numSeg;
     double sumImpair = 0.0;

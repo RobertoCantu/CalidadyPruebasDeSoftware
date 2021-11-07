@@ -1,0 +1,12 @@
+CLASES BASE:
+	ReadFile: T=53, I=3, B=55, D=2, M=7, A=0
+	Tuple: T=37, I=0, B=21, D=0, M=0, A=16
+--------------------------------------------
+CLASES NUEVAS:
+	MultipleRegression: T=137, I=2
+	Gauss: T=32, I=1
+--------------------------------------------
+CLASES REUSADAS:
+	main: T=9, I=0, B=9
+--------------------------------------------
+Total de LDC=268
